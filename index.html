@@ -115,14 +115,16 @@
             height: 100%;
         }
 
-        .game-card:hover {
+        .game-card.clickable:hover {
             transform: translate(-6px, -6px);
             box-shadow: 22px 22px 0 #a1312b;
             border-color: #c54f4f;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%23b33b3b" stroke="%238b0000" stroke-width="2"/><text x="16" y="22" font-size="16" text-anchor="middle" fill="%23ffd966" font-family="Arial">⚡</text></svg>') 16 16, auto;
         }
 
-        .game-card:hover {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%23b33b3b" stroke="%238b0000" stroke-width="2"/><text x="16" y="22" font-size="16" text-anchor="middle" fill="%23ffd966" font-family="Arial">⚡</text></svg>') 16 16, auto;
+        /* non-link card (simple game) does not have hover effect that suggests navigation */
+        .game-card:not(.clickable) {
+            cursor: default;
         }
 
         .dev-ribbon {
@@ -206,6 +208,39 @@
             box-shadow: 3px 3px 0 #7b3f1a;
             font-size: 0.8rem;
             white-space: nowrap;
+        }
+
+        /* Simple game specific styles */
+        .stamp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin: 10px 0;
+        }
+        .stamp-cell {
+            background: #b48b5a;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            border: 3px solid #4a2c14;
+            box-shadow: inset 0 0 0 2px #e0c29b;
+            transition: 0.1s ease;
+            cursor: pointer;
+        }
+        .stamp-cell.active {
+            background: #d68b3c;
+            box-shadow: 0 0 0 3px #f3ce7a, inset 0 0 0 2px #ffdd99;
+            transform: scale(1.02);
+        }
+        .score-badge {
+            background: #1e2b3a;
+            color: #ffd966;
+            padding: 5px 12px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 3px solid #b33b3b;
         }
 
         /* QUICK REFERENCE */
@@ -405,10 +440,10 @@
             </div>
         </div>
 
-        <!-- GAME CARDS – six games, with dev ribbons showing correct usernames -->
+        <!-- GAME CARDS – six external games + one built-in simple game -->
         <div class="game-grid">
             <!-- CARD 1: subhamadhikari / ballot-paper 3D -->
-            <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card" id="card3d">
+            <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card clickable" id="card3d">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> subhamadhikari</div>
                 <div class="card-icon"><span>🎮</span> <span>🗳️</span></div>
                 <div class="card-title">3D मतदान <span style="font-size:0.8rem;">⬆️⬇️⬅️➡️</span></div>
@@ -426,7 +461,7 @@
             </a>
 
             <!-- CARD 2: saveenstha / Ballot Blitz -->
-            <a href="https://saveenstha.github.io/election_games/ballot-blitz.html" target="_blank" class="game-card" id="cardBlitz">
+            <a href="https://saveenstha.github.io/election_games/ballot-blitz.html" target="_blank" class="game-card clickable" id="cardBlitz">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
                 <div class="card-icon"><span>⚡</span> <span>🗳️</span></div>
                 <div class="card-title">ब्यालेट ब्लिट्ज <span style="font-size:0.8rem;">BALLOT BLITZ</span></div>
@@ -442,7 +477,7 @@
             </a>
 
             <!-- CARD 3: saveenstha / Steady Hand -->
-            <a href="https://saveenstha.github.io/election_games/steady-hand.html" target="_blank" class="game-card" id="cardSteady">
+            <a href="https://saveenstha.github.io/election_games/steady-hand.html" target="_blank" class="game-card clickable" id="cardSteady">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
                 <div class="card-icon"><span>🤚</span> <span>🎯</span></div>
                 <div class="card-title">स्टेडी ह्यान्ड <span style="font-size:0.8rem;">STEADY HAND</span></div>
@@ -460,7 +495,7 @@
             </a>
 
             <!-- CARD 4: crypticsy / Ballot Inspector -->
-            <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank" class="game-card" id="cardInspector">
+            <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank" class="game-card clickable" id="cardInspector">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> crypticsy</div>
                 <div class="card-icon"><span>🔍</span> <span>🗳️</span></div>
                 <div class="card-title">मतपत्र परीक्षक <span style="font-size:0.7rem;">INSPECTOR</span></div>
@@ -477,7 +512,7 @@
             </a>
 
             <!-- CARD 5: shankarbhattarai123 / election-simulation -->
-            <a href="https://shankarbhattarai123.github.io/election-simulation/" target="_blank" class="game-card" id="cardSim">
+            <a href="https://shankarbhattarai123.github.io/election-simulation/" target="_blank" class="game-card clickable" id="cardSim">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> shankarbhattarai123</div>
                 <div class="card-icon"><span>📊</span> <span>🗳️</span></div>
                 <div class="card-title">निर्वाचन सिमुलेशन <span style="font-size:0.8rem;">SIM</span></div>
@@ -498,7 +533,7 @@
             </a>
 
             <!-- CARD 6: sandipkatel / election.skatel.com.np (username updated) -->
-            <a href="https://election.skatel.com.np/" target="_blank" class="game-card" id="cardSkatel">
+            <a href="https://election.skatel.com.np/" target="_blank" class="game-card clickable" id="cardSkatel">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> sandipkatel</div>
                 <div class="card-icon"><span>🌐</span> <span>🗳️</span></div>
                 <div class="card-title">निर्वाचन पोर्टल <span style="font-size:0.8rem;">SANDIPKATEL</span></div>
@@ -514,6 +549,33 @@
                 </div>
                 <div class="hover-tip"><i class="fas fa-map-marked-alt"></i> जिल्ला नक्सा · click for live</div>
             </a>
+
+            <!-- CARD 7: सबैभन्दा सरल खेल (simplest game) built right here -->
+            <div class="game-card" id="simpleGameCard">
+                <div class="dev-ribbon"><i class="fas fa-code"></i> built-in · सरल</div>
+                <div class="card-icon"><span>⚡</span> <span>🖱️</span></div>
+                <div class="card-title">स्ट्याम्प रश <span style="font-size:0.8rem;">STAMP RUSH</span></div>
+                <div class="game-preview" id="simpleGamePreview">
+                    <div style="text-align:center; margin-bottom:8px;">
+                        <span class="key-badge" id="stampScore">स्कोर: 0</span>
+                    </div>
+                    <div class="stamp-grid" id="stampGrid">
+                        <div class="stamp-cell" data-cell="0">🗳️</div>
+                        <div class="stamp-cell" data-cell="1">🗳️</div>
+                        <div class="stamp-cell" data-cell="2">🗳️</div>
+                        <div class="stamp-cell" data-cell="3">🗳️</div>
+                        <div class="stamp-cell" data-cell="4">🗳️</div>
+                        <div class="stamp-cell" data-cell="5">🗳️</div>
+                        <div class="stamp-cell" data-cell="6">🗳️</div>
+                        <div class="stamp-cell" data-cell="7">🗳️</div>
+                        <div class="stamp-cell" data-cell="8">🗳️</div>
+                    </div>
+                    <div style="margin-top:10px; font-size:0.8rem;">⭐ active cell glows · click it to score</div>
+                </div>
+                <div class="hover-tip">
+                    <i class="fas fa-mouse-pointer"></i> जति छिटो, त्यति धेरै अंक
+                </div>
+            </div>
         </div>
 
         <!-- QUICK REFERENCE (collapsible) with 2082 rules -->
@@ -552,6 +614,7 @@
                             <li>🤚 Steady: mouse move</li>
                             <li>🔍 Inspector: V / I keys</li>
                             <li>📊 Sim: drag bars (demo)</li>
+                            <li>🖱️ Stamp Rush: click glowing cell</li>
                         </ul>
                     </div>
                     <div class="ref-block">
@@ -589,90 +652,95 @@
         </div>
     </div>
 
-    <!-- JavaScript for interactions + new card hovers -->
+    <!-- JavaScript for all interactions + simple game logic -->
     <script>
         (function() {
-            // ----- card 1 (3d) dynamic text -----
+            // ----- external card effects (existing) -----
             const card3d = document.getElementById('card3d');
             const posSpan = document.getElementById('pos3d');
-            card3d.addEventListener('mouseenter', () => { posSpan.innerText = '⬆️⬇️⬅️➡️ + SPACE'; });
-            card3d.addEventListener('mouseleave', () => { posSpan.innerText = 'drag to orbit'; });
+            if (card3d) {
+                card3d.addEventListener('mouseenter', () => { posSpan.innerText = '⬆️⬇️⬅️➡️ + SPACE'; });
+                card3d.addEventListener('mouseleave', () => { posSpan.innerText = 'drag to orbit'; });
+            }
 
-            // ----- card 2 (Ballot Blitz) timer + flicker -----
             const cardBlitz = document.getElementById('cardBlitz');
             const blitzTimer = document.getElementById('blitzTimer');
             const blitzPreview = document.getElementById('blitzPreview');
             let blitzInterval, timerInterval;
-            function startBlitz() {
-                const speedDiv = blitzPreview.querySelector('div:last-child');
-                let flick = true;
-                blitzInterval = setInterval(() => {
-                    speedDiv.style.opacity = flick ? '0.5' : '1';
-                    speedDiv.style.transform = flick ? 'scale(0.95)' : 'scale(1)';
-                    flick = !flick;
-                }, 150);
-                let time = Math.floor(Math.random() * 15) + 10;
-                blitzTimer.innerText = `⏳ ${time}`;
-                if (timerInterval) clearInterval(timerInterval);
-                timerInterval = setInterval(() => {
-                    time -= 1;
-                    if (time < 0) time = 0;
+            if (cardBlitz) {
+                function startBlitz() {
+                    const speedDiv = blitzPreview.querySelector('div:last-child');
+                    let flick = true;
+                    blitzInterval = setInterval(() => {
+                        speedDiv.style.opacity = flick ? '0.5' : '1';
+                        speedDiv.style.transform = flick ? 'scale(0.95)' : 'scale(1)';
+                        flick = !flick;
+                    }, 150);
+                    let time = Math.floor(Math.random() * 15) + 10;
                     blitzTimer.innerText = `⏳ ${time}`;
-                    if (time === 0) clearInterval(timerInterval);
-                }, 500);
-            }
-            function stopBlitz() {
-                clearInterval(blitzInterval);
-                clearInterval(timerInterval);
-                const speedDiv = blitzPreview.querySelector('div:last-child');
-                if (speedDiv) {
-                    speedDiv.style.opacity = '1';
-                    speedDiv.style.transform = 'scale(1)';
+                    if (timerInterval) clearInterval(timerInterval);
+                    timerInterval = setInterval(() => {
+                        time -= 1;
+                        if (time < 0) time = 0;
+                        blitzTimer.innerText = `⏳ ${time}`;
+                        if (time === 0) clearInterval(timerInterval);
+                    }, 500);
                 }
-                blitzTimer.innerText = '⏳ 00';
+                function stopBlitz() {
+                    clearInterval(blitzInterval);
+                    clearInterval(timerInterval);
+                    const speedDiv = blitzPreview.querySelector('div:last-child');
+                    if (speedDiv) {
+                        speedDiv.style.opacity = '1';
+                        speedDiv.style.transform = 'scale(1)';
+                    }
+                    blitzTimer.innerText = '⏳ 00';
+                }
+                cardBlitz.addEventListener('mouseenter', startBlitz);
+                cardBlitz.addEventListener('mouseleave', stopBlitz);
             }
-            cardBlitz.addEventListener('mouseenter', startBlitz);
-            cardBlitz.addEventListener('mouseleave', stopBlitz);
 
-            // ----- card 3 (Steady Hand) preview animation (gentle pulse) -----
             const cardSteady = document.getElementById('cardSteady');
             const steadyPreview = document.getElementById('steadyPreview');
             let steadyInterval;
-            function startSteady() {
-                const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
-                steadyInterval = setInterval(() => {
-                    target.style.transform = `translateX(${Math.sin(Date.now()/200)*3}px)`;
-                }, 50);
+            if (cardSteady) {
+                function startSteady() {
+                    const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
+                    if (!target) return;
+                    steadyInterval = setInterval(() => {
+                        target.style.transform = `translateX(${Math.sin(Date.now()/200)*3}px)`;
+                    }, 50);
+                }
+                function stopSteady() {
+                    clearInterval(steadyInterval);
+                    const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
+                    if (target) target.style.transform = 'translateX(0)';
+                }
+                cardSteady.addEventListener('mouseenter', startSteady);
+                cardSteady.addEventListener('mouseleave', stopSteady);
             }
-            function stopSteady() {
-                clearInterval(steadyInterval);
-                const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
-                if (target) target.style.transform = 'translateX(0)';
-            }
-            cardSteady.addEventListener('mouseenter', startSteady);
-            cardSteady.addEventListener('mouseleave', stopSteady);
 
-            // ----- card 4 (Inspector) flicker valid count -----
             const cardInspector = document.getElementById('cardInspector');
             const validCounter = document.getElementById('validCounter');
             let inspectorInterval;
-            function startInspector() {
-                inspectorInterval = setInterval(() => {
-                    const valid = Math.floor(Math.random() * 25) + 8;
-                    const invalid = Math.floor(Math.random() * 10) + 1;
-                    validCounter.innerText = `VALID ${valid} / INVALID ${invalid}`;
-                    validCounter.style.background = valid % 2 ? '#a1312b' : '#2b1b0e';
-                }, 400);
+            if (cardInspector) {
+                function startInspector() {
+                    inspectorInterval = setInterval(() => {
+                        const valid = Math.floor(Math.random() * 25) + 8;
+                        const invalid = Math.floor(Math.random() * 10) + 1;
+                        validCounter.innerText = `VALID ${valid} / INVALID ${invalid}`;
+                        validCounter.style.background = valid % 2 ? '#a1312b' : '#2b1b0e';
+                    }, 400);
+                }
+                function stopInspector() {
+                    clearInterval(inspectorInterval);
+                    validCounter.innerText = 'VALID 12 / INVALID 3';
+                    validCounter.style.background = '#2b1b0e';
+                }
+                cardInspector.addEventListener('mouseenter', startInspector);
+                cardInspector.addEventListener('mouseleave', stopInspector);
             }
-            function stopInspector() {
-                clearInterval(inspectorInterval);
-                validCounter.innerText = 'VALID 12 / INVALID 3';
-                validCounter.style.background = '#2b1b0e';
-            }
-            cardInspector.addEventListener('mouseenter', startInspector);
-            cardInspector.addEventListener('mouseleave', stopInspector);
 
-            // ----- card 5 (Simulation) bar animation -----
             const cardSim = document.getElementById('cardSim');
             const simPreview = document.getElementById('simPreview');
             let simInterval;
@@ -701,7 +769,6 @@
                 });
             }
 
-            // ----- card 6 (sandipkatel) district blink -----
             const cardSkatel = document.getElementById('cardSkatel');
             const skatelPreview = document.getElementById('skatelPreview');
             let skatelInterval;
@@ -721,26 +788,95 @@
                 });
             }
 
+            // ----- SIMPLE GAME (built-in) -----
+            const grid = document.getElementById('stampGrid');
+            if (grid) {
+                const cells = Array.from(document.querySelectorAll('.stamp-cell'));
+                const scoreSpan = document.getElementById('stampScore');
+                let activeIndex = Math.floor(Math.random() * 9);
+                let score = 0;
+                let gameInterval;
+
+                function setActiveCell(index) {
+                    cells.forEach((cell, i) => {
+                        if (i === index) {
+                            cell.classList.add('active');
+                        } else {
+                            cell.classList.remove('active');
+                        }
+                    });
+                }
+
+                function moveActive() {
+                    let newIndex;
+                    do {
+                        newIndex = Math.floor(Math.random() * 9);
+                    } while (newIndex === activeIndex && cells.length > 1);
+                    activeIndex = newIndex;
+                    setActiveCell(activeIndex);
+                }
+
+                // start the game: move every 1.2 seconds
+                gameInterval = setInterval(moveActive, 1200);
+
+                // click handler
+                cells.forEach((cell, idx) => {
+                    cell.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (idx === activeIndex) {
+                            score++;
+                            scoreSpan.innerText = `स्कोर: ${score}`;
+                            // add stamp effect
+                            const stamp = document.createElement('div');
+                            stamp.className = 'stamp-pop';
+                            stamp.innerHTML = '🗳️';
+                            stamp.style.left = (e.pageX - 20) + 'px';
+                            stamp.style.top = (e.pageY - 20) + 'px';
+                            stamp.style.color = '#2b6e4f';
+                            stamp.style.fontSize = '2.5rem';
+                            document.body.appendChild(stamp);
+                            setTimeout(() => stamp.remove(), 600);
+                            // move immediately to next cell (bonus speed)
+                            moveActive();
+                        } else {
+                            // wrong click: slight penalty (optional)
+                            score = Math.max(0, score - 1);
+                            scoreSpan.innerText = `स्कोर: ${score}`;
+                        }
+                    });
+                });
+
+                // initial active
+                setActiveCell(activeIndex);
+
+                // cleanup if card is removed (not needed, but good practice)
+                window.addEventListener('beforeunload', () => {
+                    clearInterval(gameInterval);
+                });
+            }
+
             // ----- Quick reference toggle -----
             const refToggle = document.getElementById('refToggle');
             const refContent = document.getElementById('refContent');
             const toggleIcon = document.getElementById('toggleIcon');
-            refToggle.addEventListener('click', () => {
-                const isOpen = refContent.classList.contains('show');
-                if (isOpen) {
-                    refContent.classList.remove('show');
-                    toggleIcon.classList.remove('fa-chevron-up');
-                    toggleIcon.classList.add('fa-chevron-down');
-                } else {
-                    refContent.classList.add('show');
-                    toggleIcon.classList.remove('fa-chevron-down');
-                    toggleIcon.classList.add('fa-chevron-up');
-                }
-            });
+            if (refToggle) {
+                refToggle.addEventListener('click', () => {
+                    const isOpen = refContent.classList.contains('show');
+                    if (isOpen) {
+                        refContent.classList.remove('show');
+                        toggleIcon.classList.remove('fa-chevron-up');
+                        toggleIcon.classList.add('fa-chevron-down');
+                    } else {
+                        refContent.classList.add('show');
+                        toggleIcon.classList.remove('fa-chevron-down');
+                        toggleIcon.classList.add('fa-chevron-up');
+                    }
+                });
+            }
 
-            // ----- Stamp effect everywhere (except links) -----
+            // ----- Stamp effect everywhere (except links and game cells) -----
             document.body.addEventListener('click', function(e) {
-                if (e.target.closest('a')) return;
+                if (e.target.closest('a') || e.target.closest('.stamp-cell')) return;
                 const stamp = document.createElement('div');
                 stamp.className = 'stamp-pop';
                 stamp.innerHTML = '卐';
@@ -774,8 +910,15 @@
     </script>
     <!-- ensure ref panel starts closed -->
     <script>
-        document.getElementById('refContent').classList.remove('show');
-        document.getElementById('toggleIcon').classList.add('fa-chevron-down');
+        (function() {
+            const refContent = document.getElementById('refContent');
+            const toggleIcon = document.getElementById('toggleIcon');
+            if (refContent) refContent.classList.remove('show');
+            if (toggleIcon) {
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+            }
+        })();
     </script>
 </body>
 </html>
