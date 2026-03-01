@@ -391,7 +391,7 @@
             </div>
         </div>
 
-        <!-- GAME CARDS – now with five games including shankarbhattarai123 and skatel -->
+        <!-- GAME CARDS – now with six games: two from saveenstha (ballot-blitz & steady-hand) plus others -->
         <div class="game-grid">
             <!-- CARD 1: subhamadhikari / ballot-paper 3D -->
             <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card" id="card3d">
@@ -411,23 +411,41 @@
                 <div class="hover-tip"><i class="fas fa-arrows-alt"></i> move & stamp · <span id="pos3d">drag to orbit</span></div>
             </a>
 
-            <!-- CARD 2: saveenstha / Ballot Blitz + Steady Hand -->
-            <a href="https://saveenstha.github.io/election_games/" target="_blank" class="game-card" id="cardBlitz">
+            <!-- CARD 2: saveenstha / Ballot Blitz (new separate card) -->
+            <a href="https://saveenstha.github.io/election_games/ballot-blitz.html" target="_blank" class="game-card" id="cardBlitz">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
-                <div class="card-icon"><span>⚡</span> <span>🤚</span></div>
-                <div class="card-title">ब्यालेट ब्लिट्ज <span style="font-size:0.8rem;">/STEADY</span></div>
+                <div class="card-icon"><span>⚡</span> <span>🗳️</span></div>
+                <div class="card-title">ब्यालेट ब्लिट्ज <span style="font-size:0.8rem;">BALLOT BLITZ</span></div>
                 <div class="game-preview" id="blitzPreview">
                     <div style="display:flex; justify-content:space-between;">
-                        <span><i class="fas fa-hourglass-half"></i></span>
+                        <span><i class="fas fa-bolt"></i> speed</span>
                         <span id="blitzTimer" class="key-badge" style="background:#a1312b; color:#ffe28a;">⏳ 00</span>
                     </div>
                     <div style="height:8px; background:#a1312b; width:80%; margin:10px 0;"></div>
-                    <div style="display:flex; gap:10px; justify-content:center;">💨 गति · 🎯 स्थिरता</div>
+                    <div style="display:flex; gap:10px; justify-content:center;">💨 fast clicks · 30 sec</div>
                 </div>
-                <div class="hover-tip"><i class="fas fa-bolt"></i> fast / steady · flicker on hover</div>
+                <div class="hover-tip"><i class="fas fa-hourglass-half"></i> time attack · stamp as fast as you can</div>
             </a>
 
-            <!-- CARD 3: crypticsy / Ballot Inspector -->
+            <!-- CARD 3: saveenstha / Steady Hand (second game) -->
+            <a href="https://saveenstha.github.io/election_games/steady-hand.html" target="_blank" class="game-card" id="cardSteady">
+                <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
+                <div class="card-icon"><span>🤚</span> <span>🎯</span></div>
+                <div class="card-title">स्टेडी ह्यान्ड <span style="font-size:0.8rem;">STEADY HAND</span></div>
+                <div class="game-preview" id="steadyPreview">
+                    <div style="display:flex; justify-content:center; gap:20px;">
+                        <span class="key-badge">← →</span>
+                        <span class="key-badge" style="background:#2b6e4f;">STABLE</span>
+                    </div>
+                    <div style="margin:12px 0; display:flex; justify-content:center;">
+                        <span style="font-size:2rem;">🎯⚖️</span>
+                    </div>
+                    <div>keep in center · don't shake</div>
+                </div>
+                <div class="hover-tip"><i class="fas fa-hand-peace"></i> precision · steady cursor wins</div>
+            </a>
+
+            <!-- CARD 4: crypticsy / Ballot Inspector -->
             <a href="https://crypticsy.github.io/ballot-inspector/" target="_blank" class="game-card" id="cardInspector">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> crypticsy</div>
                 <div class="card-icon"><span>🔍</span> <span>🗳️</span></div>
@@ -444,7 +462,7 @@
                 <div class="hover-tip"><i class="fas fa-check-circle"></i> +2s / <i class="fas fa-times-circle"></i> -8s</div>
             </a>
 
-            <!-- CARD 4: shankarbhattarai123 / election-simulation (NEW) -->
+            <!-- CARD 5: shankarbhattarai123 / election-simulation -->
             <a href="https://shankarbhattarai123.github.io/election-simulation/" target="_blank" class="game-card" id="cardSim">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> shankarbhattarai123</div>
                 <div class="card-icon"><span>📊</span> <span>🗳️</span></div>
@@ -465,7 +483,7 @@
                 <div class="hover-tip"><i class="fas fa-chart-bar"></i> seat simulator · ±5% hover</div>
             </a>
 
-            <!-- CARD 5: skatel / election.skatel.com.np (NEW) -->
+            <!-- CARD 6: skatel / election.skatel.com.np -->
             <a href="https://election.skatel.com.np/" target="_blank" class="game-card" id="cardSkatel">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> skatel</div>
                 <div class="card-icon"><span>🌐</span> <span>🗳️</span></div>
@@ -517,6 +535,7 @@
                         <ul>
                             <li>🕹️ 3D: ↑↓←→, SPACE stamp</li>
                             <li>⚡ Blitz: mouse / click</li>
+                            <li>🤚 Steady: mouse move</li>
                             <li>🔍 Inspector: V / I keys</li>
                             <li>📊 Sim: drag bars (demo)</li>
                         </ul>
@@ -559,18 +578,23 @@
     <!-- JavaScript for interactions + new card hovers -->
     <script>
         (function() {
-            // ----- existing card effects -----
+            // ----- card 1 (3d) dynamic text -----
+            const card3d = document.getElementById('card3d');
+            const posSpan = document.getElementById('pos3d');
+            card3d.addEventListener('mouseenter', () => { posSpan.innerText = '⬆️⬇️⬅️➡️ + SPACE'; });
+            card3d.addEventListener('mouseleave', () => { posSpan.innerText = 'drag to orbit'; });
+
+            // ----- card 2 (Ballot Blitz) timer + flicker -----
             const cardBlitz = document.getElementById('cardBlitz');
             const blitzTimer = document.getElementById('blitzTimer');
             const blitzPreview = document.getElementById('blitzPreview');
             let blitzInterval, timerInterval;
-
             function startBlitz() {
-                const speedSpan = blitzPreview.querySelector('div:last-child');
+                const speedDiv = blitzPreview.querySelector('div:last-child');
                 let flick = true;
                 blitzInterval = setInterval(() => {
-                    speedSpan.style.opacity = flick ? '0.5' : '1';
-                    speedSpan.style.transform = flick ? 'scale(0.95)' : 'scale(1)';
+                    speedDiv.style.opacity = flick ? '0.5' : '1';
+                    speedDiv.style.transform = flick ? 'scale(0.95)' : 'scale(1)';
                     flick = !flick;
                 }, 150);
                 let time = Math.floor(Math.random() * 15) + 10;
@@ -586,17 +610,35 @@
             function stopBlitz() {
                 clearInterval(blitzInterval);
                 clearInterval(timerInterval);
-                const speedSpan = blitzPreview.querySelector('div:last-child');
-                if (speedSpan) {
-                    speedSpan.style.opacity = '1';
-                    speedSpan.style.transform = 'scale(1)';
+                const speedDiv = blitzPreview.querySelector('div:last-child');
+                if (speedDiv) {
+                    speedDiv.style.opacity = '1';
+                    speedDiv.style.transform = 'scale(1)';
                 }
                 blitzTimer.innerText = '⏳ 00';
             }
             cardBlitz.addEventListener('mouseenter', startBlitz);
             cardBlitz.addEventListener('mouseleave', stopBlitz);
 
-            // card inspector
+            // ----- card 3 (Steady Hand) preview animation (gentle pulse) -----
+            const cardSteady = document.getElementById('cardSteady');
+            const steadyPreview = document.getElementById('steadyPreview');
+            let steadyInterval;
+            function startSteady() {
+                const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
+                steadyInterval = setInterval(() => {
+                    target.style.transform = `translateX(${Math.sin(Date.now()/200)*3}px)`;
+                }, 50);
+            }
+            function stopSteady() {
+                clearInterval(steadyInterval);
+                const target = steadyPreview.querySelector('span[style*="font-size:2rem"]');
+                if (target) target.style.transform = 'translateX(0)';
+            }
+            cardSteady.addEventListener('mouseenter', startSteady);
+            cardSteady.addEventListener('mouseleave', stopSteady);
+
+            // ----- card 4 (Inspector) flicker valid count -----
             const cardInspector = document.getElementById('cardInspector');
             const validCounter = document.getElementById('validCounter');
             let inspectorInterval;
@@ -616,13 +658,7 @@
             cardInspector.addEventListener('mouseenter', startInspector);
             cardInspector.addEventListener('mouseleave', stopInspector);
 
-            // card 3d dynamic text
-            const card3d = document.getElementById('card3d');
-            const posSpan = document.getElementById('pos3d');
-            card3d.addEventListener('mouseenter', () => { posSpan.innerText = '⬆️⬇️⬅️➡️ + SPACE'; });
-            card3d.addEventListener('mouseleave', () => { posSpan.innerText = 'drag to orbit'; });
-
-            // ----- NEW CARD 4: simulation hover (animated bars) -----
+            // ----- card 5 (Simulation) bar animation -----
             const cardSim = document.getElementById('cardSim');
             const simPreview = document.getElementById('simPreview');
             let simInterval;
@@ -632,9 +668,8 @@
                     if (bars.length < 3) return;
                     simInterval = setInterval(() => {
                         bars.forEach((bar, idx) => {
-                            let newH = Math.floor(Math.random() * 50) + 25; // between 25-75px
+                            let newH = Math.floor(Math.random() * 50) + 25;
                             bar.style.height = newH + 'px';
-                            // vary colors slightly
                             if (idx === 0) bar.style.background = '#b33b3b';
                             if (idx === 1) bar.style.background = '#2b6e4f';
                             if (idx === 2) bar.style.background = '#3b4bb3';
@@ -652,7 +687,7 @@
                 });
             }
 
-            // ----- NEW CARD 5: skatel hover (district blink) -----
+            // ----- card 6 (skatel) district blink -----
             const cardSkatel = document.getElementById('cardSkatel');
             const skatelPreview = document.getElementById('skatelPreview');
             let skatelInterval;
@@ -661,7 +696,6 @@
                     const districts = skatelPreview.querySelectorAll('span[style*="background:#8b5a2b"]');
                     skatelInterval = setInterval(() => {
                         districts.forEach(el => {
-                            // toggle between two brownish/red shades
                             el.style.background = el.style.background === 'rgb(187, 59, 59)' ? '#8b5a2b' : '#b33b3b';
                         });
                     }, 400);
@@ -673,7 +707,7 @@
                 });
             }
 
-            // Quick reference toggle
+            // ----- Quick reference toggle -----
             const refToggle = document.getElementById('refToggle');
             const refContent = document.getElementById('refContent');
             const toggleIcon = document.getElementById('toggleIcon');
@@ -690,9 +724,9 @@
                 }
             });
 
-            // Stamp effect everywhere
+            // ----- Stamp effect everywhere (except links) -----
             document.body.addEventListener('click', function(e) {
-                if (e.target.closest('a')) return; // avoid interfering with links
+                if (e.target.closest('a')) return;
                 const stamp = document.createElement('div');
                 stamp.className = 'stamp-pop';
                 stamp.innerHTML = '卐';
@@ -705,7 +739,7 @@
                 setTimeout(() => stamp.remove(), 800);
             });
 
-            // floating background fun (reduced frequency)
+            // floating background (sporadic)
             setInterval(() => {
                 if (Math.random() > 0.8) {
                     const floating = document.createElement('div');
