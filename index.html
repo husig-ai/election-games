@@ -344,6 +344,20 @@
             justify-content: center;
         }
 
+        .github-credits a {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #fad473;
+            text-decoration: none;
+            border-bottom: 2px dotted #b33b3b;
+        }
+
+        .github-credits a:hover {
+            color: #ffb347;
+            border-bottom: 2px solid #ffb347;
+        }
+
         /* stamp animation */
         .stamp-pop {
             position: fixed;
@@ -391,7 +405,7 @@
             </div>
         </div>
 
-        <!-- GAME CARDS – now with six games: two from saveenstha (ballot-blitz & steady-hand) plus others -->
+        <!-- GAME CARDS – six games, with dev ribbons showing correct usernames -->
         <div class="game-grid">
             <!-- CARD 1: subhamadhikari / ballot-paper 3D -->
             <a href="https://ballot-paper.vercel.app/" target="_blank" class="game-card" id="card3d">
@@ -411,7 +425,7 @@
                 <div class="hover-tip"><i class="fas fa-arrows-alt"></i> move & stamp · <span id="pos3d">drag to orbit</span></div>
             </a>
 
-            <!-- CARD 2: saveenstha / Ballot Blitz (new separate card) -->
+            <!-- CARD 2: saveenstha / Ballot Blitz -->
             <a href="https://saveenstha.github.io/election_games/ballot-blitz.html" target="_blank" class="game-card" id="cardBlitz">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
                 <div class="card-icon"><span>⚡</span> <span>🗳️</span></div>
@@ -427,7 +441,7 @@
                 <div class="hover-tip"><i class="fas fa-hourglass-half"></i> time attack · stamp as fast as you can</div>
             </a>
 
-            <!-- CARD 3: saveenstha / Steady Hand (second game) -->
+            <!-- CARD 3: saveenstha / Steady Hand -->
             <a href="https://saveenstha.github.io/election_games/steady-hand.html" target="_blank" class="game-card" id="cardSteady">
                 <div class="dev-ribbon"><i class="fab fa-github"></i> saveenstha</div>
                 <div class="card-icon"><span>🤚</span> <span>🎯</span></div>
@@ -483,11 +497,11 @@
                 <div class="hover-tip"><i class="fas fa-chart-bar"></i> seat simulator · ±5% hover</div>
             </a>
 
-            <!-- CARD 6: skatel / election.skatel.com.np -->
+            <!-- CARD 6: sandipkatel / election.skatel.com.np (username updated) -->
             <a href="https://election.skatel.com.np/" target="_blank" class="game-card" id="cardSkatel">
-                <div class="dev-ribbon"><i class="fab fa-github"></i> skatel</div>
+                <div class="dev-ribbon"><i class="fab fa-github"></i> sandipkatel</div>
                 <div class="card-icon"><span>🌐</span> <span>🗳️</span></div>
-                <div class="card-title">निर्वाचन पोर्टल <span style="font-size:0.8rem;">SKATEL</span></div>
+                <div class="card-title">निर्वाचन पोर्टल <span style="font-size:0.8rem;">SANDIPKATEL</span></div>
                 <div class="game-preview" id="skatelPreview">
                     <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
                         <span style="background:#8b5a2b; padding:5px 8px; color:#ffd966;">प्रदेश १</span>
@@ -561,15 +575,15 @@
             </div>
         </div>
 
-        <!-- FOOTER with husig.ai link and all github credits -->
+        <!-- FOOTER with husig.ai link and clickable github profiles -->
         <div class="footer">
             <div><i class="fas fa-mug-hot"></i> coffee break project @ <a href="https://husig.ai" target="_blank"><strong>husig.ai</strong></a> · data & AI team</div>
             <div class="github-credits">
-                <span><i class="fab fa-github"></i> subhamadhikari</span>
-                <span><i class="fab fa-github"></i> saveenstha</span>
-                <span><i class="fab fa-github"></i> crypticsy</span>
-                <span><i class="fab fa-github"></i> shankarbhattarai123</span>
-                <span><i class="fab fa-github"></i> skatel</span>
+                <a href="https://github.com/subhamadhikari" target="_blank"><i class="fab fa-github"></i> subhamadhikari</a>
+                <a href="https://github.com/saveenstha" target="_blank"><i class="fab fa-github"></i> saveenstha</a>
+                <a href="https://github.com/crypticsy" target="_blank"><i class="fab fa-github"></i> crypticsy</a>
+                <a href="https://github.com/shankarbhattarai123" target="_blank"><i class="fab fa-github"></i> shankarbhattarai123</a>
+                <a href="https://github.com/sandipkatel" target="_blank"><i class="fab fa-github"></i> sandipkatel</a>
             </div>
             <div><i class="fas fa-stamp"></i> 卐 २०८२ 卐</div>
         </div>
@@ -687,7 +701,7 @@
                 });
             }
 
-            // ----- card 6 (skatel) district blink -----
+            // ----- card 6 (sandipkatel) district blink -----
             const cardSkatel = document.getElementById('cardSkatel');
             const skatelPreview = document.getElementById('skatelPreview');
             let skatelInterval;
