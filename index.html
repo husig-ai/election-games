@@ -750,6 +750,7 @@
             </div>
         </div>
 
+        <!-- ════════════════ BENTO GAME GRID ════════════════ -->
         <div class="game-grid">
 
             <!-- CARD 1: subhamadhikari / ballot-paper 3D (wide, col 1–2, row 1) -->
@@ -781,9 +782,9 @@
                 <div class="hover-tip"><i class="fas fa-cube"></i> 3D Environment &middot; Move &amp; Stamp Your Ballot</div>
             </a>
 
-            <!-- CARD 7: ayushsubedi / Stamp Rush (tall, col 3, rows 1–2) -->
+            <!-- CARD 7: husig-ai / Stamp Rush (tall, col 3, rows 1–2) -->
             <div class="game-card" id="simpleGameCard">
-                <div class="dev-ribbon"><i class="fab fa-github"></i> ayushsubedi</div>
+                <div class="dev-ribbon"><i class="fab fa-github"></i> husig-ai</div>
                 <div class="card-body">
                     <div class="card-icons">
                         <div class="icon-main"><i class="fas fa-computer-mouse"></i></div>
@@ -940,20 +941,9 @@
                         <div class="icon-main"><i class="fas fa-earth-asia"></i></div>
                         <div class="icon-tag"><i class="fas fa-map"></i> Portal</div>
                     </div>
-                    <div style="margin:12px 0;"><span class="key-badge">लाइभ नतिजा</span> <span class="key-badge">मतगणना</span></div>
-                    <div>📍 ७७ जिल्ला · नक्सा</div>
-                </div>
-                <div class="hover-tip"><i class="fas fa-map-marked-alt"></i> जिल्ला नक्सा · click for live</div>
-            </a>
-
-            <!-- CARD 7: husig-ai / सबैभन्दा सरल खेल (simplest game) -->
-            <div class="game-card" id="simpleGameCard">
-                <div class="dev-ribbon"><i class="fab fa-github"></i> husig</div>
-                <div class="card-icon"><span>⚡</span> <span>🖱️</span></div>
-                <div class="card-title">स्ट्याम्प रश <span style="font-size:0.8rem;">STAMP RUSH</span></div>
-                <div class="game-preview" id="simpleGamePreview">
-                    <div style="text-align:center; margin-bottom:8px;">
-                        <span class="key-badge" id="stampScore">स्कोर: 0</span>
+                    <div class="card-title">
+                        निर्वाचन पोर्टल
+                        <span class="card-subtitle">Election Portal &middot; 77 जिल्ला</span>
                     </div>
                     <div class="game-preview" id="skatelPreview">
                         <div style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:12px;">
@@ -1056,7 +1046,7 @@
             </div>
         </div>
 
-        <!-- FOOTER with husig.ai link and clickable github profiles (including husig-ai) -->
+        <!-- ════════════════ FOOTER ════════════════ -->
         <div class="footer">
             <div class="footer-brand">
                 <i class="fas fa-mug-hot"></i> coffee break @ <a href="https://husig.ai" target="_blank">husig.ai</a> &middot; data &amp; AI
@@ -1161,22 +1151,20 @@
             cardInspector.addEventListener('mouseleave', stopInspector);
         }
 
-            // ----- SIMPLE GAME (built-in, attributed to husig-ai) -----
-            const grid = document.getElementById('stampGrid');
-            if (grid) {
-                const cells = Array.from(document.querySelectorAll('.stamp-cell'));
-                const scoreSpan = document.getElementById('stampScore');
-                let activeIndex = Math.floor(Math.random() * 9);
-                let score = 0;
-                let gameInterval;
-
-                function setActiveCell(index) {
-                    cells.forEach((cell, i) => {
-                        if (i === index) {
-                            cell.classList.add('active');
-                        } else {
-                            cell.classList.remove('active');
-                        }
+        // ----- Card 5: Simulation bar chart -----
+        const cardSim   = document.getElementById('cardSim');
+        const simPreview = document.getElementById('simPreview');
+        let simInterval;
+        if (cardSim) {
+            cardSim.addEventListener('mouseenter', () => {
+                const bars = simPreview.querySelectorAll('span[style*="display:inline-block"]');
+                if (bars.length < 3) return;
+                simInterval = setInterval(() => {
+                    bars.forEach((bar, idx) => {
+                        bar.style.height = Math.floor(Math.random() * 52) + 22 + 'px';
+                        if (idx === 0) bar.style.background = '#b33b3b';
+                        if (idx === 1) bar.style.background = '#2b6e4f';
+                        if (idx === 2) bar.style.background = '#3b4bb3';
                     });
                 }, 350);
             });
